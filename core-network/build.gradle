@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    defaultConfig {
+        compileSdkVersion versions.compileSdkVersion
+        buildToolsVersion versions.toolsVersion
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionName = getVersionName()
+        versionCode = getVersionCode()
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    /* kotlin */
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+
+    implementation "com.squareup.retrofit2:converter-gson:${versions.converter_gson}"
+    api "com.google.code.gson:gson:${versions.gson}"
+
+    /* dagger-hilt */
+    implementation "com.google.dagger:hilt-android:${versions.dagger_hilt}"
+
+    /* okhttp */
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3}"
+
+    /* retrofit */
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+
+    /* stetho */
+    debugImplementation "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
+
+    /* chuck */
+    debugImplementation "com.readystatesoftware.chuck:library:${versions.chuck}"
+    releaseImplementation "com.readystatesoftware.chuck:library-no-op:${versions.chuck}"
+
+    /* junit */
+    testImplementation "junit:junit:${versions.junit}"
+    testImplementation "org.junit.platform:junit-platform-runner:${versions.junitPlatformRunner}"
+
+    /* mockito */
+    testImplementation "com.nhaarman:mockito-kotlin:${versions.mockitoKotlin}"
+
+    /* assertj */
+    testImplementation "org.assertj:assertj-core:${versions.assertj}"
+}

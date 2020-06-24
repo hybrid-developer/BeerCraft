@@ -1,0 +1,7 @@
+include ':core-ui'
+include ':core-viewmodel'
+include ':core-mvi'
+include ':feature-startup'
+include ':core-network'
+include ':app'
+rootProject.name = "Beer Craft"

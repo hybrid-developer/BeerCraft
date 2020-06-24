@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    defaultConfig {
+        compileSdkVersion versions.compileSdkVersion
+        buildToolsVersion versions.toolsVersion
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionName = getVersionName()
+        versionCode = getVersionCode()
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "com.google.android.material:material:${versions.androidMaterial}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
+
+    /* junit */
+    testImplementation "junit:junit:${versions.junit}"
+    testImplementation "org.junit.platform:junit-platform-runner:${versions.junitPlatformRunner}"
+
+    /* assertj */
+    testImplementation "org.assertj:assertj-core:${versions.assertj}"
+
+    /* mockito */
+    testImplementation "com.nhaarman:mockito-kotlin:${versions.mockitoKotlin}"
+}

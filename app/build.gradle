@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.toolsVersion
+
+  defaultConfig {
+    applicationId "com.zavaitar.beercraft"
+    minSdkVersion versions.minSdkVersion
+    targetSdkVersion versions.targetSdkVersion
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    compileOptions {
+      sourceCompatibility JavaVersion.VERSION_1_8
+      targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+      jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+  }
+
+  buildTypes {
+
+    debug {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+
+    release {
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+
+  implementation project(':feature-startup')
+
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+  implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
+
+  implementation "androidx.arch.core:core-runtime:${versions.archRuntime}"
+  implementation "androidx.lifecycle:lifecycle-extensions:${versions.archLifecycleExtensions}"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.archLifecycleExtensions}"
+
+  implementation("android.arch.navigation:navigation-ui-ktx:${versions.archNavigation}") {
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
+  }
+
+  implementation("android.arch.navigation:navigation-fragment-ktx:${versions.archNavigation}") {
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
+  }
+
+  implementation "com.google.android.material:material:${versions.androidMaterial}"
+
+  /* dagger-hilt */
+  implementation "com.google.dagger:hilt-android:${versions.dagger_hilt}"
+  kapt "com.google.dagger:hilt-android-compiler:${versions.dagger_hilt}"
+
+  /* okhttp */
+  implementation "com.squareup.okhttp3:okhttp:${versions.okhttp3}"
+  implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3}"
+
+  /* retrofit */
+  implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+  implementation "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+  implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+
+  /* stetho */
+  implementation "com.facebook.stetho:stetho:${versions.stetho}"
+
+  /* junit */
+  testImplementation "junit:junit:${versions.junit}"
+  testImplementation "org.junit.platform:junit-platform-runner:${versions.junitPlatformRunner}"
+
+  /* assertj */
+  testImplementation "org.assertj:assertj-core:${versions.assertj}"
+
+  /* mockito */
+  testImplementation "com.nhaarman:mockito-kotlin:${versions.mockitoKotlin}"
+  testImplementation "org.mockito:mockito-inline:${versions.mockitoInline}"
+
+  /* Espresso */
+  androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+  androidTestImplementation "androidx.test:runner:${versions.androidTest}"
+  androidTestImplementation "androidx.test:rules:${versions.androidTest}"
+  
+}

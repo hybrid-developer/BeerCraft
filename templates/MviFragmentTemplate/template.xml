@@ -1,0 +1,16 @@
+<template name="MVI Template Fragment" description="Creates a new MVI Fragment package - Fragment, FragmentModule, Intent, Renderer, Result, View, ViewModel, ViewState" format="4"
+    revision="1">
+
+    <category value="Zavaitar" />
+
+    <parameter name="Class Name" constraints="class|unique|nonempty" default="MviFunction" help="The name of the MVI package to create"
+        id="className" type="string" />
+
+    <parameter name="Fragment Layout Name" constraints="layout|nonempty|unique" default="blank_fragment"
+        help="The name of the layout to create" id="layoutName"
+        suggest="${classToResource(className)}_fragment" type="string" />
+
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+
+</template>
